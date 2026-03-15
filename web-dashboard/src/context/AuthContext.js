@@ -52,10 +52,11 @@ export const AuthProvider = ({ children }) => {
     }).catch(() => {});
   }, []);
 
-  const login = async (email, password) => {
+const login = async (email, password) => {
     const { data } = await api.post('/auth/login', { email, password });
     localStorage.setItem('kcrvp_token', data.token);
     setUser(data.user);
+    window.location.href = '/dashboard';
     return data.user;
   };
 
