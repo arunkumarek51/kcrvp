@@ -1,0 +1,64 @@
+/* Marketplace.css */
+.marketplace { display: flex; flex-direction: column; gap: 24px; }
+.market-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.market-header h2 { color: var(--forest); }
+.market-balance { background: linear-gradient(135deg, #1a6b3c, #2d9b5a); border-radius: 14px; padding: 14px 20px; text-align: right; }
+.bal-label { display: block; font-size: 0.7rem; color: rgba(255,255,255,0.6); text-transform: uppercase; letter-spacing: 0.08em; }
+.bal-val   { display: block; font-size: 1.4rem; font-weight: 800; color: white; font-family: 'JetBrains Mono', monospace; }
+
+.market-filters { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; background: white; border: 1px solid var(--cloud); border-radius: 14px; padding: 14px 20px; }
+.filter-group { display: flex; align-items: center; gap: 10px; color: var(--ash); font-size: 0.85rem; }
+.filter-group input { width: 80px !important; padding: 7px 10px; font-size: 0.82rem; }
+.filter-apply-btn { background: var(--canopy); color: white; border: none; border-radius: 8px; padding: 7px 16px; font-size: 0.82rem; font-weight: 600; cursor: pointer; }
+.market-stats-strip { display: flex; gap: 16px; flex-wrap: wrap; }
+.market-stats-strip span { font-size: 0.78rem; color: var(--fog); display: flex; align-items: center; gap: 4px; }
+.market-stats-strip strong { color: var(--charcoal); }
+
+.listings-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+@media (max-width: 1100px) { .listings-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 700px)  { .listings-grid { grid-template-columns: 1fr; } }
+
+.listing-card { background: white; border: 1px solid var(--cloud); border-radius: 18px; overflow: hidden; display: flex; flex-direction: column; transition: all 0.2s ease; }
+.listing-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+
+.listing-top { padding: 14px 16px; display: flex; align-items: center; justify-content: space-between; }
+.listing-seller { display: flex; align-items: center; gap: 10px; }
+.seller-avatar { width: 34px; height: 34px; background: rgba(45,155,90,0.12); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; }
+.seller-name { display: block; font-size: 0.82rem; font-weight: 600; color: var(--charcoal); max-width: 120px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.seller-loc  { display: block; font-size: 0.7rem; color: var(--fog); }
+.listing-type-badge { font-size: 0.68rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; padding: 3px 10px; border-radius: 99px; white-space: nowrap; }
+
+.listing-body { padding: 16px; flex: 1; display: flex; flex-direction: column; gap: 12px; }
+.listing-credits { display: flex; flex-direction: column; }
+.credit-amount { font-size: 1.8rem; font-weight: 800; color: var(--forest); font-family: 'JetBrains Mono', monospace; line-height: 1.1; }
+.credit-unit   { font-size: 0.75rem; color: var(--fog); text-transform: uppercase; letter-spacing: 0.06em; }
+.co2-eq        { font-size: 0.78rem; color: var(--leaf); margin-top: 4px; }
+
+.listing-pricing { display: flex; align-items: center; justify-content: space-between; background: var(--ivory); border-radius: 10px; padding: 10px 14px; }
+.price-val  { font-size: 1.2rem; font-weight: 800; color: var(--forest); font-family: 'JetBrains Mono', monospace; }
+.price-unit { display: block; font-size: 0.68rem; color: var(--fog); }
+.price-total { font-size: 0.8rem; color: var(--ash); }
+.price-total strong { color: var(--forest); }
+
+.listing-desc { font-size: 0.78rem; color: var(--fog); line-height: 1.5; }
+.listing-meta { display: flex; gap: 12px; flex-wrap: wrap; }
+.listing-meta span { font-size: 0.72rem; color: var(--fog); }
+
+.listing-actions { padding: 0 16px 16px; }
+.buy-btn {
+  width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px;
+  color: white; border: none; border-radius: 12px;
+  padding: 12px; font-size: 0.875rem; font-weight: 600;
+  cursor: pointer; transition: all 0.18s ease;
+}
+.buy-btn:hover:not(:disabled) { opacity: 0.9; transform: translateY(-1px); }
+.buy-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.cancel-btn { width: 100%; background: none; border: 1.5px solid var(--coral); color: var(--coral); border-radius: 12px; padding: 11px; font-size: 0.875rem; font-weight: 600; cursor: pointer; transition: all 0.15s ease; }
+.cancel-btn:hover { background: rgba(224,92,58,0.08); }
+
+.market-empty { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; padding: 80px 20px; text-align: center; color: var(--fog); }
+.pagination { display: flex; align-items: center; justify-content: center; gap: 16px; padding: 8px; }
+.pagination button { background: white; border: 1.5px solid var(--cloud); border-radius: 10px; padding: 8px 16px; font-size: 0.85rem; font-weight: 600; color: var(--ash); cursor: pointer; transition: all 0.15s ease; }
+.pagination button:disabled { opacity: 0.4; cursor: not-allowed; }
+.pagination button:hover:not(:disabled) { border-color: var(--canopy); color: var(--canopy); }
+.pagination span { font-size: 0.85rem; color: var(--fog); }

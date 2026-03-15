@@ -1,0 +1,61 @@
+version: '3.8'
+
+services:
+  # MongoDB
+  mongodb:
+    image: mongo:7.0
+    container_name: kcrvp-mongodb
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    environment:
+      MONGO_INITDB_DATABASE: kcrvp
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/kcrvp --quiet
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Backend API
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: kcrvp-backend
+    restart: unless-stopped
+    ports:
+      - "5000:5000"
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    environment:
+      NODE_ENV: development
+      PORT: 5000
+      MONGODB_URI: mongodb://mongodb:27017/kcrvp
+      JWT_SECRET: kcrvp_dev_secret_change_in_production
+      FRONTEND_URL: http://localhost:3000
+    volumes:
+      - ./backend/src:/app/src
+    command: npm run dev
+
+  # React Web Dashboard
+  web-dashboard:
+    build:
+      context: ./web-dashboard
+      dockerfile: Dockerfile
+    container_name: kcrvp-web
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    environment:
+      REACT_APP_API_URL: http://localhost:5000/api
+      REACT_APP_SOCKET_URL: http://localhost:5000
+    volumes:
+      - ./web-dashboard/src:/app/src
+
+volumes:
+  mongodb_data:

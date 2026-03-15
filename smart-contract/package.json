@@ -1,0 +1,19 @@
+{
+  "name": "kcrvp-smart-contract",
+  "version": "1.0.0",
+  "description": "KCRVP Carbon Credit Registry on Polygon",
+  "scripts": {
+    "compile": "npx hardhat compile",
+    "test": "npx hardhat test",
+    "deploy:mumbai": "npx hardhat run scripts/deploy.js --network mumbai",
+    "deploy:local": "npx hardhat run scripts/deploy.js --network localhost",
+    "verify": "npx hardhat verify --network mumbai"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^3.0.0",
+    "hardhat": "^2.17.1"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^5.0.0"
+  }
+}
