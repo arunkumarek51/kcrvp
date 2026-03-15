@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { TreePine, Zap, Eye, EyeOff, Leaf, LogIn } from 'lucide-react';
+import { TreePine, Zap, Eye, EyeOff, LogIn } from 'lucide-react';
 import toast from 'react-hot-toast';
 import './Auth.css';
 
@@ -15,7 +15,6 @@ const DEMO_ACCOUNTS = [
 
 export default function Login() {
   const { login } = useAuth();
-  const navigate = useNavigate();
   const [form, setForm] = useState({ email: '', password: '' });
   const [showPw, setShowPw] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -27,7 +26,7 @@ export default function Login() {
     try {
       const user = await login(form.email, form.password);
       toast.success(`Welcome back, ${user.name.split(' ')[0]}! 🌿`);
-      navigate('/dashboard');
+      window.location.href = '/dashboard';
     } catch (err) {
       toast.error(err.response?.data?.message || 'Login failed');
     } finally {
@@ -40,7 +39,7 @@ export default function Login() {
     try {
       const user = await login(account.email, account.password);
       toast.success(`Logged in as ${account.label} 🌿`);
-      navigate('/dashboard');
+      window.location.href = '/dashboard';
     } catch (err) {
       toast.error('Demo login failed — make sure backend is running and seeded');
     } finally {
@@ -50,7 +49,6 @@ export default function Login() {
 
   return (
     <div className="auth-page">
-      {/* Decorative left panel */}
       <div className="auth-hero">
         <div className="hero-content">
           <div className="hero-logo">
@@ -60,7 +58,6 @@ export default function Login() {
           <h1>KCRVP</h1>
           <p className="hero-tagline">Kerala Carbon Registry & Verification Platform</p>
           <p className="hero-desc">Track green activities, earn verified carbon credits, and build a sustainable Kerala.</p>
-
           <div className="hero-stats">
             {[
               { label: 'Trees Planted', value: '12,540+' },
@@ -73,7 +70,6 @@ export default function Login() {
               </div>
             ))}
           </div>
-
           <div className="hero-badges">
             {['🌱 Tree Planting', '☀️ Solar Energy', '🚗 EV Driving', '🌾 Organic Farming'].map(b => (
               <span key={b} className="hero-badge">{b}</span>
@@ -85,7 +81,6 @@ export default function Login() {
         </div>
       </div>
 
-      {/* Login form */}
       <div className="auth-form-side">
         <div className="auth-form-wrap">
           <div className="auth-header">
