@@ -11,12 +11,15 @@ require('dotenv').config();
 const app = express();
 const server = http.createServer(app);
 const io = socketIo(server, {
-  cors: { origin: process.env.FRONTEND_URL || '*', methods: ['GET', 'POST'] }
+  cors: { origin: '*', methods: ['GET', 'POST'] }
 });
 
 // Security middleware
-app.use(helmet());
-app.use(cors({ origin: process.env.FRONTEND_URL || '*', credentials: true }));
+app.use(helmet({
+  contentSecurityPolicy: false,
+  crossOriginEmbedderPolicy: false,
+}));
+app.use(cors({ origin: '*', credentials: true }));
 app.use(morgan('dev'));
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ extended: true, limit: '50mb' }));
@@ -67,6 +70,9 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/kcrvp')
       console.log(`🚀 KCRVP Server running on port ${process.env.PORT || 5000}`);
     });
   })
-  .catch(err => { console.error('❌ MongoDB connection error:', err); process.exit(1); });
+  .catch(err => { 
+    console.error('❌ MongoDB connection error:', err); 
+    process.exit(1); 
+  });
 
 module.exports = { app, io };
